@@ -12,7 +12,7 @@ package examen1p2_juanmolina_11621058;
 public class persona {
     private String nombre, poder, debilidad, heroeVillano;
     private int fuerza, habilidadMental, habilidadFisica;
-    private boolean tieneEscuadron;
+    private boolean tieneEscuadron = false;
 
     public persona() {
     }

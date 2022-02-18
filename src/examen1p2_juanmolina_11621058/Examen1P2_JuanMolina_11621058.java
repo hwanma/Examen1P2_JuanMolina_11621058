@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 /**
  *
- String nombre, String poder, String debilidad, String heroeVillano, int fuerza, 
- * int habilidadMental, int habilidadFisica, boolean tieneEscuadron
  * 
  */
 public class Examen1P2_JuanMolina_11621058 {
@@ -37,7 +35,6 @@ public class Examen1P2_JuanMolina_11621058 {
         avengers.getMiembros().add(Thor);
         heroe.add(Thor);
         marvel.getSquads().add(avengers);
-        universos.add(marvel);
         
         escuadron avengerVillains = new escuadron("Hydra", "Rusia",false);
         
@@ -72,17 +69,76 @@ public class Examen1P2_JuanMolina_11621058 {
                         
                         case 1:{
                             System.out.println("******************************");
-                            System.out.println("Crear universo: ");
+                            System.out.println("Crear Universo ");
+                            System.out.println("Ingrese el nombre del universo: ");
+                            sc.nextLine();
+                            String nombre = sc.nextLine();
+                            
+                            while(universos.contains(nombre)){
+                                System.out.println("Ingrese el nombre del universo (unico): ");
+                                sc.nextLine();
+                                nombre = sc.nextLine();
+                            }
+                            
+                            universo nuevo = new universo(nombre);
+                            universos.add(nuevo);
                             break;
                         }
                         
                         case 2: {
                             System.out.println("******************************");
+                            System.out.println("Modificar Universo ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice a modificar: ");
+                            int indice = sc.nextInt();
+                            System.out.println(universos.get(indice).getNombre() + "sera modificado");
+                            
+                            System.out.println("Ingrese el nuevo nombre: ");
+                            sc.nextLine();
+                            String nuevoNombre = sc.nextLine();
+                            universos.get(indice).setNombre(nuevoNombre);
                             break;
                         }
 
                         case 3: {
                             System.out.println("******************************");
+                            System.out.println("Eliminar Universo ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice a modificar: ");
+                            int indice = sc.nextInt();
+                            System.out.println(universos.get(indice).getNombre() + "sera eliminado");
+                            
+                            universos.remove(indice);
+                            break;
+                        }
+                        
+                        case 4 :{
+                            System.out.println("******************************");
+                            System.out.println("Listar Universos ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
                             break;
                         }
 
@@ -101,6 +157,236 @@ public class Examen1P2_JuanMolina_11621058 {
                 
                 case 2 :{
                     System.out.println("******************************");
+                    switch(subMenuEscuadron()){
+                        case 0:{
+                            System.out.println("Gracias por utilizar el menu de Escuadrones!");
+                            break;
+                        }
+                        
+                        case 1:{
+                            System.out.println("******************************");
+                            System.out.println("Crear Escuadron ");
+                            
+                            if(universos.isEmpty()){
+                                System.out.println("Primero cree un Universo!");
+                                break;
+                            }
+                            System.out.println("Universos Actuales: ");
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice del universo: ");
+                            int indice = sc.nextInt();
+                            System.out.println(universos.get(indice).getNombre() + "aqui se creara el escuadron");
+                            
+                            System.out.println("Es un escuadron de HEROE o VILLANO?");
+                            sc.nextLine();
+                            String respuesta = sc.nextLine();
+                            boolean heroeOvillano = true;
+                            
+                            while(respuesta!="HEROE"&&respuesta!="VILLANO"){
+                                System.out.println("Es un escuadron de HEROE o VILLANO?");
+                                sc.nextLine();
+                                respuesta = sc.nextLine();
+                            }
+                            
+                            if(respuesta == "HEROE"){
+                                heroeOvillano = true;
+                            } else if(respuesta == "VILLANO"){
+                                heroeOvillano = false;
+                            }
+                            
+                            System.out.println("Ingrese el nombre del escuadron: ");
+                            sc.nextLine();
+                            String nombre = sc.nextLine();
+                            
+                            while(universos.get(indice).getSquads().contains(nombre)){
+                                System.out.println("Ingrese el nombre del escuadron (unico): ");
+                                sc.nextLine();
+                                nombre = sc.nextLine();
+                            }
+                            
+                            System.out.println("Ingrese el nombre de la base: ");
+                            sc.nextLine();
+                            String base = sc.nextLine();
+                            
+                            if(heroeOvillano){
+                                if(heroe.isEmpty()){
+                                    System.out.println("Debe primero crear heroes!");
+                                    break;
+                                } 
+                            } else {
+                                if(villano.isEmpty()){
+                                    System.out.println("Debe primero crear villanos!");
+                                    break;
+                                }
+                            }
+                            
+                            String acum2 = "";
+                            persona lider;
+                            if(heroeOvillano){
+                                for (persona temp : heroe) {
+                                    if(!temp.isTieneEscuadron()){
+                                        acum2 += heroe.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                                    }
+                                }
+                                System.out.println(acum2);
+                                System.out.println("Seleccione un lider: ");
+                                int indiceLider = sc.nextInt();
+                                lider = heroe.get(indiceLider);
+                                heroe.get(indiceLider).setTieneEscuadron(true);
+                            } else {
+                                for (persona temp : villano) {
+                                    if(!temp.isTieneEscuadron()){
+                                        acum2 += villano.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                                    }
+                                }
+                                System.out.println(acum2);
+                                System.out.println("Seleccione un lider: ");
+                                int indiceLider = sc.nextInt();
+                                lider = villano.get(indiceLider);
+                                villano.get(indiceLider).setTieneEscuadron(true);
+                            }
+                            
+                            ArrayList<persona> miembros = new ArrayList();
+                            System.out.println("Agregar miembros: ");
+                            if(heroeOvillano){
+                                for (persona temp : heroe) {
+                                    if(!temp.isTieneEscuadron()){
+                                        System.out.println(temp.getNombre());
+                                        System.out.println("Agregar miembro? s/n");
+                                        char respAgregar = sc.nextLine().charAt(0);
+                                        if(respAgregar == 's'){
+                                            miembros.add(temp);
+                                        }
+                                    }
+                                }
+                            } else {
+                                for (persona temp : villano) {
+                                    if(!temp.isTieneEscuadron()){
+                                        System.out.println(temp.getNombre());
+                                        System.out.println("Agregar miembro? s/n");
+                                        char respAgregar = sc.nextLine().charAt(0);
+                                        if(respAgregar == 's'){
+                                            miembros.add(temp);
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            
+                            escuadron nuevo = new escuadron(nombre,base,lider,heroeOvillano,miembros);
+                            universos.get(indice).getSquads().add(nuevo);
+                            break;
+                        }
+                        
+                        case 2: {
+                            System.out.println("******************************");
+                            System.out.println("Modificar Escuadron ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice del universo: ");
+                            int indice = sc.nextInt();
+                            System.out.println(universos.get(indice).getNombre() + "aqui se modificara el escuadron");
+                            
+                            String acum2 = "";
+                            for (escuadron temp : universos.get(indice).getSquads()) {
+                                acum2 += universos.get(indice).getSquads().indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum2);
+                            
+                            System.out.println("Ingrese el indice del escuadron: ");
+                            int indiceEscuadron = sc.nextInt();
+                            System.out.println(universos.get(indice).getSquads().get(indiceEscuadron).getNombre() + "escuadron a modificar");
+                            
+                            System.out.println("Ingrese el nuevo nombre: ");
+                            sc.nextLine();
+                            String nuevoNombre = sc.nextLine();
+                            universos.get(indice).getSquads().get(indiceEscuadron).setNombre(nuevoNombre);
+                            
+                            System.out.println("Ingrese la nueva base: ");
+                            sc.nextLine();
+                            String nuevaBase = sc.nextLine();
+                            universos.get(indice).getSquads().get(indiceEscuadron).setLugarBase(nuevaBase);
+                            break;
+                        }
+
+                        case 3: {
+                            System.out.println("******************************");
+                            System.out.println("Eliminar Universo ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice del universo: ");
+                            int indice = sc.nextInt();
+                            System.out.println(universos.get(indice).getNombre() + "aqui se eliminara el escuadron");
+                            
+                            String acum2 = "";
+                            for (escuadron temp : universos.get(indice).getSquads()) {
+                                acum2 += universos.get(indice).getSquads().indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum2);
+                            
+                            System.out.println("Ingrese el indice del escuadron: ");
+                            int indiceEscuadron = sc.nextInt();
+                            System.out.println(universos.get(indice).getSquads().get(indiceEscuadron).getNombre() + "escuadron a eliminar");
+                            
+                            universos.get(indice).getSquads().remove(indiceEscuadron);
+                            break;
+                        }
+                        
+                        case 4 :{
+                            System.out.println("******************************");
+                            System.out.println("Listar Universos ");
+                            
+                            System.out.println("Universos Actuales: ");
+                            
+                            String acum = "";
+                            for (universo temp : universos) {
+                                acum += universos.indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum);
+                            
+                            System.out.println("Ingrese el indice del universo: ");
+                            int indice = sc.nextInt();
+                            
+                            String acum2 = "";
+                            for (escuadron temp : universos.get(indice).getSquads()) {
+                                acum2 += universos.get(indice).getSquads().indexOf(temp) + ". " + temp.getNombre() + "\n";
+                            }
+                            System.out.println(acum2);
+                            break;
+                        }
+                        
+                        case 5:{
+                            System.out.println("Simulacion");
+                            break;
+                        }
+
+                        default: {
+                            System.out.println("******************************");
+                            System.out.println("!!");
+                            System.out.println("Error, por favor introduzca un valor del menu.");
+                            System.out.println("!!");
+                            System.out.println(" ");
+                            break;
+                        }
+                    }
                     break;
                 }
                 
@@ -119,7 +405,6 @@ public class Examen1P2_JuanMolina_11621058 {
                 }
             }
         }
-        
     }
     
     public static int menu(){

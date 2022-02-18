@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Hwan
  */
 public class mutante extends persona{
-    private ArrayList<String> factoresMutante;
+    private ArrayList<String> factoresMutante = new ArrayList();
 
     public mutante() {
     }

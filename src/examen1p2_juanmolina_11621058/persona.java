@@ -96,9 +96,12 @@ public class persona {
         
     }
 
-    @Override
-    public String toString() {
-        return " persona {" + "nombre=" + nombre + ", poder=" + poder + ", debilidad=" + debilidad + ", heroeVillano=" + heroeVillano + ", fuerza=" + fuerza + ", habilidadMental=" + habilidadMental + ", habilidadFisica=" + habilidadFisica + ", tieneEscuadron=" + tieneEscuadron + '}';
+    public String toString(boolean heroeVillano) {
+        if(heroeVillano){
+            return " persona {" + "nombre=" + nombre + ", poder=" + poder + '}';
+        } else {
+            return " persona {" + "nombre=" + nombre + ", debilidad=" + debilidad + '}';
+        }
     }
     
     

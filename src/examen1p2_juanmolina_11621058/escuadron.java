@@ -15,7 +15,7 @@ public class escuadron {
     private String nombre, lugarBase;
     private persona lider;
     private boolean heroeVillano;
-    private ArrayList<persona> miembros;
+    private ArrayList<persona> miembros = new ArrayList();
 
     public escuadron() {
     }
@@ -26,6 +26,12 @@ public class escuadron {
         this.lider = lider;
         this.heroeVillano = heroeVillano;
         this.miembros = miembros;
+    }
+    
+    public escuadron(String nombre, String lugarBase, boolean heroeVillano) {
+        this.nombre = nombre;
+        this.lugarBase = lugarBase;
+        this.heroeVillano = heroeVillano;
     }
 
     public String getNombre() {
@@ -70,7 +76,7 @@ public class escuadron {
 
     @Override
     public String toString() {
-        return ", escuadron{" + "nombre=" + nombre + ", lugarBase=" + lugarBase + ", lider=" + lider + ", heroeVillano=" + heroeVillano + ", miembros=" + miembros + '}';
+        return ", escuadron{" + "nombre=" + nombre + '}';
     }
     
     

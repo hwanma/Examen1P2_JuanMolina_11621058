@@ -20,6 +20,12 @@ public class deidad extends extraterrestre{
         super(nombre, poder, debilidad, heroeVillano, fuerza, habilidadMental, habilidadFisica, tieneEscuadron);
     }
 
+    public deidad(boolean tieneCreyentes, String religionMitologia, String nombre, String poder, String debilidad, String heroeVillano, int fuerza, int habilidadMental, int habilidadFisica, boolean tieneEscuadron) {
+        super(nombre, poder, debilidad, heroeVillano, fuerza, habilidadMental, habilidadFisica, tieneEscuadron);
+        this.tieneCreyentes = tieneCreyentes;
+        this.religionMitologia = religionMitologia;
+    }
+    
     public boolean isTieneCreyentes() {
         return tieneCreyentes;
     }

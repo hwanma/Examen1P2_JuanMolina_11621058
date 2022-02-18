@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class universo {
     private String nombre;
-    ArrayList<escuadron> squads;
+    ArrayList<escuadron> squads = new ArrayList();
 
     public universo() {
     }
@@ -21,6 +21,10 @@ public class universo {
     public universo(String nombre, ArrayList<escuadron> squads) {
         this.nombre = nombre;
         this.squads = squads;
+    }
+    
+    public universo(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {
@@ -41,7 +45,7 @@ public class universo {
 
     @Override
     public String toString() {
-        return "universo{" + "nombre=" + nombre + ", squads=" + squads + '}';
+        return "universo{" + "nombre=" + nombre + '}';
     }
     
 }
